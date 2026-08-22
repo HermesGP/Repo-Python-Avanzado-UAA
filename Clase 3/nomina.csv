@@ -1,0 +1,16 @@
+id,nombre,apellido,edad,departamento,salario,fecha_ingreso
+1,Ana,Gómez,28,Administración,4500000,2021-03-15
+2,Luis,Martínez,35,Sistemas,7200000,2019-07-01
+3,María,López,24,Marketing,3800000,2022-11-20
+4,Carlos,Pérez,41,Finanzas,8500000,2018-02-10
+5,Sofía,Rodríguez,30,Recursos Humanos,5000000,2020-05-05
+6,Jorge,Benítez,29,Sistemas,6800000,2021-09-12
+7,Lucía,Fernández,33,Administración,4700000,2019-01-25
+8,Diego,Ramírez,26,Marketing,3900000,2023-04-18
+9,Paula,Acosta,38,Finanzas,8200000,2017-12-03
+10,Raúl,Vera,45,Gerencia,12000000,2016-06-30
+11,Valentina,Castro,27,Recursos Humanos,5100000,2022-08-14
+12,Andrés,Morales,31,Sistemas,7000000,2020-10-22
+13,Isabella,Suárez,34,Administración,4600000,2018-11-11
+14,Martín,García,25,Marketing,4000000,2023-01-05
+15,Renata,Hernández,39,Finanzas,8300000,2017-03-19
