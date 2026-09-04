@@ -47,6 +47,3 @@ class DetallePedido(Base):
 
     pedido: Mapped["Pedido"] = relationship(back_populates="detalles")
     producto: Mapped["Producto"] = relationship(back_populates="detalles")
-
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
