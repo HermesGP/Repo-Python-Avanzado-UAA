@@ -1,0 +1,99 @@
+ARQUITECTURA POR CAPAS - GESTIÓN DE PRODUCTOS
+=============================================
+
+1. ESTRUCTURA DE CARPETAS
+-------------------------
+Clase 10/
+├── main.py                      Punto de entrada: crea tablas y arranca Flet
+├── views/
+│   └── producto_view.py         Interfaz (Flet): formulario, tabla, botones
+├── services/
+│   └── producto_service.py      Reglas de negocio + manejo de sesión
+├── DAOs/
+│   └── producto_dao.py          Acceso a datos: listar, crear, editar, eliminar
+├── models/
+│   └── producto.py              Entidad ORM (tabla "productos")
+└── database/
+    └── config.py                Motor, Base y SessionLocal (lee DATABASE_URL)
+
+
+2. CAPAS Y DEPENDENCIAS (cada capa solo conoce a la de abajo)
+-------------------------------------------------------------
+
+   +------------------------------------------------+
+   |  VIEW          views/producto_view.py          |
+   |  Muestra datos y recibe acciones del usuario   |
+   +------------------------+-----------------------+
+                            |  llama a
+                            v
+   +------------------------------------------------+
+   |  SERVICE       services/producto_service.py    |
+   |  Valida reglas (precios, stock, fecha)         |
+   |  Abre y cierra la sesión: with SessionLocal()  |
+   +------------------------+-----------------------+
+                            |  crea ProductoDAO(db) y llama a
+                            v
+   +------------------------------------------------+
+   |  DAO           DAOs/producto_dao.py            |
+   |  Consultas, add, commit, delete                |
+   +------------------------+-----------------------+
+                            |  trabaja con
+                            v
+   +------------------------------------------------+
+   |  MODEL         models/producto.py              |
+   |  Clase Producto <-> tabla productos            |
+   +------------------------+-----------------------+
+                            |  usa Base de
+                            v
+   +------------------------------------------------+
+   |  DATABASE      database/config.py              |
+   |  engine, Base, SessionLocal  ->  MySQL         |
+   +------------------------------------------------+
+
+   Regla: nunca hacia arriba. El DAO no conoce Flet ni el Service.
+          La vista nunca toca la base de datos directamente.
+
+
+3. FLUJO DE "GUARDAR PRODUCTO"
+------------------------------
+
+ Usuario        View               Service                DAO              MySQL
+    |             |                   |                    |                 |
+    |--clic------>|                   |                    |                 |
+    |             |--crear_producto-->|                    |                 |
+    |             |                   |-valida precios,    |                 |
+    |             |                   | stock y fecha      |                 |
+    |             |                   |-abre sesión        |                 |
+    |             |                   |--crear(producto)-->|                 |
+    |             |                   |                    |--INSERT-------->|
+    |             |                   |                    |<-----OK---------|
+    |             |                   |<---producto--------|                 |
+    |             |                   |-cierra sesión      |                 |
+    |             |<---producto-------|                    |                 |
+    |<-SnackBar---|                   |                    |                 |
+    |  "Guardado" |                   |                    |                 |
+
+   Si una validación falla:
+    Service lanza ValueError  ->  View lo captura  ->  muestra SnackBar con el mensaje
+    (no se abre sesión ni se llega a la base de datos)
+
+
+4. ¿EN QUÉ CAPA VA CADA CAMBIO?
+-------------------------------
+   Cambio                                          Capa
+   ----------------------------------------------  ---------
+   Cambiar una etiqueta o el color de un botón     View
+   "El stock no puede ser negativo"                Service
+   "Mostrar el precio con dos decimales"           View
+   Agregar una columna a productos                 Model + DAO
+   Cambiar de MySQL a PostgreSQL                   Database
+   Filtrar la búsqueda también por código          DAO
+
+
+5. VOCABULARIO
+--------------
+   View     Lo que ve el usuario. Captura eventos (on_click) y muestra resultados.
+   Service  Lógica de negocio. Decide si una operación es válida.
+   DAO      Data Access Object. Único lugar que "habla" con la base de datos.
+   Model    Clase Python que representa una tabla (SQLAlchemy ORM).
+   Session  Conversación con la base de datos; se abre al operar y se cierra al terminar.
