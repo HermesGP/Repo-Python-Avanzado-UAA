@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 
-DATABASE_URL = "mysql+pymysql://hermes:PythonAvanzado@localhost/placeholder"
+DATABASE_URL = "mysql+asyncmy://hermes:PythonAvanzado@localhost/placeholder"
 
 class Base(DeclarativeBase):
     pass

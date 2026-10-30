@@ -26,6 +26,7 @@ async def guardar_posts(posts):
 async def main():
     # Crear tablas si no existen
     async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
 
     print("Obteniendo datos de la API...")
