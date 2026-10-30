@@ -7,3 +7,12 @@ ENV/
 # Archivos de caché de Python
 __pycache__/
 *.pyc
+
+# Archivos de configuración de Flet
+config.json
+
+# Gráficos generados
+*.png
+*.jpg
+*.jpeg
+*.svg
