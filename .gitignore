@@ -3,6 +3,7 @@ venv/
 .venv/
 env/
 ENV/
+.pytest_cache/
 
 # Archivos de caché de Python
 __pycache__/
