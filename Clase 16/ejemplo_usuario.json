@@ -1,0 +1,16 @@
+[
+    {
+        "nombre": "Juan Perez",
+        "cedula": "123456789",
+        "correo_electronico": "juan.perez@example.com",
+        "telefono": "555-1234",
+        "fecha_nacimiento": "1990-01-01"
+    },
+    {
+        "nombre": "Maria Lopez",
+        "cedula": "987654321",
+        "correo_electronico": "maria.lopez@example.com",
+        "telefono": "555-5678",
+        "fecha_nacimiento": "1992-05-10"
+    }
+]
