@@ -53,4 +53,3 @@ def editar_usuario(id):
         service.actualizar_usuario(usuario_dao, usuario)
         return jsonify(usuario.to_dict())
     return ("Usuario no encontrado", 404)
-
