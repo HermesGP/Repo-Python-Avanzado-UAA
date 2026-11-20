@@ -22,3 +22,6 @@ class UsuarioDAO:
     def eliminar(self, usuario: Usuario):
         self.session.delete(usuario)
         self.session.commit()
+
+    def buscar_por_nombre(self, nombre: str):
+        return self.session.query(Usuario).filter(Usuario.nombre.ilike(f"%{nombre}%")).all()
