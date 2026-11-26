@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+    <head>
+        <title>
+            {% block titulo %}{{ config.APP_NAME }}{% endblock %}
+        </title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Bootstrap CSS v5.3.8 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand navbar-light bg-light">
+                <div class="nav navbar-nav">
+                    <a class="nav-item nav-link active" href="{{ url_for('index') }}" aria-current="page"
+                        >{{ config.APP_NAME }} <span class="visually-hidden">(current)</span></a
+                    >
+                    <a class="nav-item nav-link" href="{{ url_for('index') }}">Home</a>
+                </div>
+            </nav>
+            
+            </nav>
+        </header>
+        <main class="container py-4">
+            {% block contenido %}{% endblock %}
+        </main>
+        <footer class="bg-dark text-light py-4 text-center">
+            Aplicación desarrollada con Flask y Bootstrap 5.
+        </footer>
+        <!-- Bootstrap JavaScript Bundle (includes Popper) -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

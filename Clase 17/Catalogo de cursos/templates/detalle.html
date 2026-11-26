@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block titulo %}{{ curso.nombre }}{% endblock %}
+
+{% block contenido %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h1>{{ curso.nombre }}</h1>
+        <p><strong>Profesor:</strong> {{ curso.profesor }}</p>
+        <p><strong>Duración:</strong> {{ curso.duracion }} horas</p>
+        <p><strong>Nivel:</strong> {{ curso.nivel }}</p>
+        <p><strong>Descripción:</strong> {{ curso.descripcion }}</p>
+        <p>
+        {% if curso.activo %}
+        <span class="badge bg-success">Disponible</span>
+        {% else %}
+        <span class="badge bg-secondary">No disponible</span>
+        {% endif %}
+        </p>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Volver al catálogo</a>
+    </div>
+</div>
+{% endblock %}
